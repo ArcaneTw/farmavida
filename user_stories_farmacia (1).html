@@ -1,0 +1,315 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);color:var(--color-text-primary);font-size:14px;}
+.wrap{padding:1rem 0;}
+.module{margin-bottom:2rem;}
+.module-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.module-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.module-icon svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;}
+.module-title{font-size:15px;font-weight:500;}
+.stories{display:flex;flex-direction:column;gap:10px;}
+.story{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;}
+.story-header{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;user-select:none;}
+.story-id{font-size:10px;font-weight:500;font-family:var(--font-mono);padding:2px 7px;border-radius:4px;flex-shrink:0;}
+.story-title{font-size:13px;font-weight:500;flex:1;line-height:1.4;}
+.story-prio{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;flex-shrink:0;}
+.prio-alta{background:#FCEBEB;color:#791F1F;}
+.prio-media{background:#FAEEDA;color:#633806;}
+.prio-baja{background:#EAF3DE;color:#27500A;}
+.chevron{width:14px;height:14px;stroke:var(--color-text-tertiary);fill:none;stroke-width:2;flex-shrink:0;transition:transform .2s;}
+.story.open .chevron{transform:rotate(180deg);}
+.story-body{display:none;padding:0 14px 14px;border-top:0.5px solid var(--color-border-tertiary);}
+.story.open .story-body{display:block;}
+.story-as{font-size:12px;color:var(--color-text-secondary);background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:8px 12px;margin-top:10px;line-height:1.6;}
+.story-as strong{color:var(--color-text-primary);font-weight:500;}
+.criteria-title{font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--color-text-tertiary);margin:12px 0 7px;}
+.criteria{display:flex;flex-direction:column;gap:5px;}
+.criterion{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--color-text-secondary);line-height:1.5;}
+.criterion-dot{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--color-border-secondary);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;}
+.criterion-dot::after{content:'✓';font-size:9px;color:var(--color-text-tertiary);}
+</style>
+
+<div class="wrap">
+
+  <!-- MÓDULO 1: REGISTRO DE PRODUCTOS -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-icon" style="background:#E6F1FB;color:#0C447C;">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+      </div>
+      <span class="module-title">Módulo 1 — Registro de productos</span>
+    </div>
+    <div class="stories">
+
+      <div class="story" onclick="toggle(this)">
+        <div class="story-header">
+          <span class="story-id" style="background:#E6F1FB;color:#0C447C;">HU-01</span>
+          <span class="story-title">Registrar un nuevo producto en el inventario</span>
+          <span class="story-prio prio-alta">Alta</span>
+          <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="story-body">
+          <div class="story-as"><strong>Como</strong> farmacéutico, <strong>quiero</strong> registrar un nuevo producto con nombre, descripción, precio, cantidad y audiencia, <strong>para que</strong> esté disponible en el inventario de la farmacia.</div>
+          <div class="criteria-title">Criterios de aceptación</div>
+          <div class="criteria">
+            <div class="criterion"><div class="criterion-dot"></div><span>El formulario debe tener los campos: nombre, descripción, precio, cantidad y audiencia (adultos/niños).</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>Todos los campos son obligatorios; el sistema muestra un mensaje de error si alguno está vacío.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>El precio y la cantidad no pueden ser valores negativos.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>Al guardar exitosamente, el producto aparece de inmediato en el inventario.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>Se muestra una notificación de confirmación tras el registro exitoso.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="story" onclick="toggle(this)">
+        <div class="story-header">
+          <span class="story-id" style="background:#E6F1FB;color:#0C447C;">HU-02</span>
+          <span class="story-title">Indicar si el producto es para adultos o niños</span>
+          <span class="story-prio prio-alta">Alta</span>
+          <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="story-body">
+          <div class="story-as"><strong>Como</strong> farmacéutico, <strong>quiero</strong> clasificar cada producto como "adultos" o "niños" al registrarlo, <strong>para que</strong> el sistema aplique las reglas de descuento correctas.</div>
+          <div class="criteria-title">Criterios de aceptación</div>
+          <div class="criteria">
+            <div class="criterion"><div class="criterion-dot"></div><span>El campo audiencia es un selector con exactamente dos opciones: Adultos y Niños.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>Al seleccionar "Niños", se muestra un aviso informativo indicando que se aplicará un 5% de descuento adicional.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>La audiencia queda almacenada y visible en la tarjeta del producto en el inventario.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="story" onclick="toggle(this)">
+        <div class="story-header">
+          <span class="story-id" style="background:#E6F1FB;color:#0C447C;">HU-03</span>
+          <span class="story-title">Limpiar el formulario de registro</span>
+          <span class="story-prio prio-baja">Baja</span>
+          <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="story-body">
+          <div class="story-as"><strong>Como</strong> farmacéutico, <strong>quiero</strong> poder limpiar todos los campos del formulario con un botón, <strong>para que</strong> pueda comenzar un nuevo registro sin borrar manualmente cada campo.</div>
+          <div class="criteria-title">Criterios de aceptación</div>
+          <div class="criteria">
+            <div class="criterion"><div class="criterion-dot"></div><span>El botón "Limpiar" vacía todos los campos del formulario.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>El aviso de descuento para niños desaparece al limpiar el formulario.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>No se elimina ningún producto ya registrado.</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MÓDULO 2: STOCK -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-icon" style="background:#EAF3DE;color:#27500A;">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <span class="module-title">Módulo 2 — Visualización de stock</span>
+    </div>
+    <div class="stories">
+
+      <div class="story" onclick="toggle(this)">
+        <div class="story-header">
+          <span class="story-id" style="background:#EAF3DE;color:#27500A;">HU-04</span>
+          <span class="story-title">Ver todos los productos disponibles en inventario</span>
+          <span class="story-prio prio-alta">Alta</span>
+          <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="story-body">
+          <div class="story-as"><strong>Como</strong> farmacéutico, <strong>quiero</strong> ver todos los productos registrados en una cuadrícula de tarjetas, <strong>para que</strong> pueda conocer el inventario completo de un vistazo.</div>
+          <div class="criteria-title">Criterios de aceptación</div>
+          <div class="criteria">
+            <div class="criterion"><div class="criterion-dot"></div><span>Cada tarjeta muestra: nombre, descripción, precio, cantidad disponible y audiencia.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>El indicador de stock cambia de color: verde (suficiente), naranja (bajo stock &lt;10), rojo (sin stock).</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>Los productos recién registrados aparecen en el listado sin necesidad de recargar la página.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="story" onclick="toggle(this)">
+        <div class="story-header">
+          <span class="story-id" style="background:#EAF3DE;color:#27500A;">HU-05</span>
+          <span class="story-title">Filtrar productos por audiencia</span>
+          <span class="story-prio prio-media">Media</span>
+          <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="story-body">
+          <div class="story-as"><strong>Como</strong> farmacéutico, <strong>quiero</strong> filtrar el inventario por "Todos", "Adultos" o "Niños", <strong>para que</strong> pueda encontrar productos de una categoría específica rápidamente.</div>
+          <div class="criteria-title">Criterios de aceptación</div>
+          <div class="criteria">
+            <div class="criterion"><div class="criterion-dot"></div><span>Existen tres botones de filtro: Todos, Adultos y Niños.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>Al hacer clic en un filtro, solo se muestran los productos de esa audiencia.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>El filtro activo se resalta visualmente para indicar la selección actual.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>Si no hay productos en esa categoría, se muestra un mensaje informativo.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="story" onclick="toggle(this)">
+        <div class="story-header">
+          <span class="story-id" style="background:#EAF3DE;color:#27500A;">HU-06</span>
+          <span class="story-title">Buscar productos por nombre o descripción</span>
+          <span class="story-prio prio-media">Media</span>
+          <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="story-body">
+          <div class="story-as"><strong>Como</strong> farmacéutico, <strong>quiero</strong> buscar productos escribiendo en un campo de texto, <strong>para que</strong> pueda localizar un producto específico sin recorrer todo el inventario.</div>
+          <div class="criteria-title">Criterios de aceptación</div>
+          <div class="criteria">
+            <div class="criterion"><div class="criterion-dot"></div><span>El buscador filtra en tiempo real mientras el usuario escribe.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>La búsqueda aplica sobre el nombre y la descripción del producto.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>La búsqueda es compatible con el filtro de audiencia activo.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>Si no hay coincidencias, se muestra el mensaje "No se encontraron productos".</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MÓDULO 3: PRECIOS Y DESCUENTOS -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-icon" style="background:#FAEEDA;color:#633806;">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <span class="module-title">Módulo 3 — Precios y descuentos</span>
+    </div>
+    <div class="stories">
+
+      <div class="story" onclick="toggle(this)">
+        <div class="story-header">
+          <span class="story-id" style="background:#FAEEDA;color:#633806;">HU-07</span>
+          <span class="story-title">Aplicar descuento del 20% a productos</span>
+          <span class="story-prio prio-alta">Alta</span>
+          <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="story-body">
+          <div class="story-as"><strong>Como</strong> cliente, <strong>quiero</strong> ver el precio con descuento aplicado automáticamente en todos los productos, <strong>para que</strong> pueda conocer el valor real que pagaré.</div>
+          <div class="criteria-title">Criterios de aceptación</div>
+          <div class="criteria">
+            <div class="criterion"><div class="criterion-dot"></div><span>Los productos muestran el precio final con el 20% de descuento aplicado.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>El precio original se muestra tachado junto al precio con descuento.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>Se muestra un badge "-20%" visible en la tarjeta del producto.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>El descuento se calcula automáticamente sin intervención del usuario.</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MÓDULO 4: CARRITO -->
+  <div class="module">
+    <div class="module-header">
+      <div class="module-icon" style="background:#FBEAF0;color:#72243E;">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      </div>
+      <span class="module-title">Módulo 4 — Carrito de compras</span>
+    </div>
+    <div class="stories">
+
+      <div class="story" onclick="toggle(this)">
+        <div class="story-header">
+          <span class="story-id" style="background:#FBEAF0;color:#72243E;">HU-08</span>
+          <span class="story-title">Agregar un producto al carrito</span>
+          <span class="story-prio prio-alta">Alta</span>
+          <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="story-body">
+          <div class="story-as"><strong>Como</strong> cliente, <strong>quiero</strong> agregar productos al carrito desde el inventario, <strong>para que</strong> pueda seleccionar los medicamentos que deseo comprar.</div>
+          <div class="criteria-title">Criterios de aceptación</div>
+          <div class="criteria">
+            <div class="criterion"><div class="criterion-dot"></div><span>Cada tarjeta de producto tiene un botón "Agregar al carrito".</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>Al agregar, el contador del carrito en la barra superior se incrementa y muestra una animación.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>Si el producto ya está en el carrito, se incrementa su cantidad en lugar de duplicarlo.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>Se muestra una notificación confirmando que el producto fue agregado.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>El botón está deshabilitado si el producto no tiene stock disponible.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="story" onclick="toggle(this)">
+        <div class="story-header">
+          <span class="story-id" style="background:#FBEAF0;color:#72243E;">HU-09</span>
+          <span class="story-title">Modificar la cantidad de un producto en el carrito</span>
+          <span class="story-prio prio-alta">Alta</span>
+          <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="story-body">
+          <div class="story-as"><strong>Como</strong> cliente, <strong>quiero</strong> aumentar o disminuir la cantidad de cada producto en el carrito, <strong>para que</strong> pueda ajustar mi pedido sin tener que eliminarlo y volver a agregarlo.</div>
+          <div class="criteria-title">Criterios de aceptación</div>
+          <div class="criteria">
+            <div class="criterion"><div class="criterion-dot"></div><span>Cada ítem del carrito tiene botones "+" y "−" para modificar la cantidad.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>No se puede superar la cantidad disponible en stock.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>Si la cantidad llega a 0, el producto se elimina automáticamente del carrito.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>El precio total del ítem se recalcula en tiempo real al cambiar la cantidad.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="story" onclick="toggle(this)">
+        <div class="story-header">
+          <span class="story-id" style="background:#FBEAF0;color:#72243E;">HU-10</span>
+          <span class="story-title">Eliminar un producto del carrito</span>
+          <span class="story-prio prio-media">Media</span>
+          <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="story-body">
+          <div class="story-as"><strong>Como</strong> cliente, <strong>quiero</strong> eliminar un producto del carrito, <strong>para que</strong> pueda quitar ítems que ya no deseo comprar.</div>
+          <div class="criteria-title">Criterios de aceptación</div>
+          <div class="criteria">
+            <div class="criterion"><div class="criterion-dot"></div><span>Cada ítem del carrito tiene un botón de eliminar (icono de papelera).</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>Al eliminar, el ítem desaparece del carrito y los totales se recalculan.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>Si el carrito queda vacío, se muestra el mensaje "El carrito está vacío".</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="story" onclick="toggle(this)">
+        <div class="story-header">
+          <span class="story-id" style="background:#FBEAF0;color:#72243E;">HU-11</span>
+          <span class="story-title">Ver el resumen de costos en el carrito</span>
+          <span class="story-prio prio-alta">Alta</span>
+          <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="story-body">
+          <div class="story-as"><strong>Como</strong> cliente, <strong>quiero</strong> ver el subtotal, el descuento aplicado y el total final en el carrito, <strong>para que</strong> pueda saber cuánto pagaré antes de finalizar la compra.</div>
+          <div class="criteria-title">Criterios de aceptación</div>
+          <div class="criteria">
+            <div class="criterion"><div class="criterion-dot"></div><span>El carrito muestra: subtotal (sin descuento), descuento total y total final.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>Los valores se actualizan automáticamente al agregar, eliminar o cambiar cantidades.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>El descuento se muestra por separado y en color diferenciado.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="story" onclick="toggle(this)">
+        <div class="story-header">
+          <span class="story-id" style="background:#FBEAF0;color:#72243E;">HU-12</span>
+          <span class="story-title">Finalizar la compra</span>
+          <span class="story-prio prio-media">Media</span>
+          <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="story-body">
+          <div class="story-as"><strong>Como</strong> cliente, <strong>quiero</strong> finalizar mi compra con un botón de confirmación, <strong>para que</strong> se registre el pedido y se limpie el carrito.</div>
+          <div class="criteria-title">Criterios de aceptación</div>
+          <div class="criteria">
+            <div class="criterion"><div class="criterion-dot"></div><span>El botón "Finalizar compra" está visible en la parte inferior del carrito.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>Al confirmar, el carrito se vacía y se cierra el panel.</span></div>
+            <div class="criterion"><div class="criterion-dot"></div><span>Se muestra una notificación de compra exitosa.</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggle(el){el.classList.toggle('open');}
+</script>
