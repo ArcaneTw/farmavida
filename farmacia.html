@@ -616,9 +616,7 @@ function registerProduct(){
   saveLocalState();
   clearForm();
   showToast(`"${name}" registrado exitosamente.`);
-  showPage('stock',document.querySelector('.nav-btn'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.nav-btn')[0].classList.add('active');
+  renderProducts();
 }
 
 function clearForm(){
